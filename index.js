@@ -3,6 +3,18 @@ const { input, select, checkbox } = require('@inquirer/prompts');
 const fs = require('fs').promises;
 
 
+//SALVAR LIVROS 
+
+async function salvaLivros() {
+    try {
+        await fs.writeFile('biblioteca.json', JSON.stringify(metas, null, 2));
+        mostrarMensagem("✔️ Cadastro realizado com sucesso!");
+    } catch (error) {
+        mostrarMensagem("❌ Erro ao cadastrar: ",  error.mensagem);
+    }
+}
+
+
 async function cadastrarLivro() {
     try {
         await fs.writeFile('livros.json', JSON.stringify(livros, null, 2));
@@ -44,6 +56,5 @@ if (!titulo.trim() || !autor.trim() || !paginas.trim() || !genero.trim()) {
         console.log("✅ Livro cadastrado com sucesso!");*/
 
 }
-
 
 cadastrarLivro();
